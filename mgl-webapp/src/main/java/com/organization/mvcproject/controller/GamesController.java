@@ -1,5 +1,5 @@
-//TODO 1.0   package naming convention, improve package declaration
-package com.organization.mvcproject.MGL_Task1.controller;
+
+package com.organization.mvcproject.controller;
 
 import java.util.List;
 
@@ -16,15 +16,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.organization.mvcproject.MGL_Task1.model.Game;
 import com.organization.mvcproject.MGL_Task1.model.Review;
-import com.organization.mvcproject.MGL_Task1.service.Game_Service;
+import com.organization.mvcproject.MGL_Task1.service.GameService;
 
-//TODO 1.0  follow java class naming, improve class name
+
 @Controller
-public class MGL_Task1_Controller {
+public class GamesController {
 
-	//TODO 1.0 variable naming convention, improve reference name
+	
 	@Autowired
-	private Game_Service javaGameService;
+	private GameService gameService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
@@ -71,13 +71,13 @@ public class MGL_Task1_Controller {
 	//TODO 1.0 RequestMapping URL should follow RESTful.
 	@RequestMapping(value = "/game/getAll", method = RequestMethod.GET)
 	public ResponseEntity<List<Game>> fetchAllGames() {
-		return new ResponseEntity<List<Game>>(javaGameService.retrieveAllGames(), HttpStatus.OK);
+		return new ResponseEntity<List<Game>>(gameService.retrieveAllGames(), HttpStatus.OK);
 	}
 
 	//TODO 1.0 RequestMapping URL should follow RESTful convention
 	@RequestMapping(value = "/game/createGame", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> createGame(@RequestBody Game game) {
-		javaGameService.saveGame(game);
+		gameService.saveGame(game);
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
 }
