@@ -23,7 +23,7 @@ import com.organization.mvcproject.service.GameService;
 
 
 @Controller
-public class GamesController {
+public class GameAndReviewController {
 
 	
 	@Autowired
