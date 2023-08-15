@@ -3,20 +3,23 @@ package com.organization.mvcproject.controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.organization.mvcproject.MGL_Task1.model.Game;
-import com.organization.mvcproject.MGL_Task1.model.Review;
-import com.organization.mvcproject.MGL_Task1.service.GameService;
+import com.organization.mvcproject.model.Game;
+import com.organization.mvcproject.model.Review;
+import com.organization.mvcproject.service.GameService;
 
 
 @Controller
@@ -26,17 +29,17 @@ public class GamesController {
 	@Autowired
 	private GameService gameService;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@GetMapping
 	public String home() {
 		return "index";
 	}
 	
-	@RequestMapping(value = "/review", method = RequestMethod.GET)
+	@GetMapping("review")
 	public ModelAndView review() {
 		return new ModelAndView("reviewCreatePage", "command", new Review());
 	}
 
-	@RequestMapping(value = "/addReview", method = RequestMethod.POST)
+	@PostMapping("addReview")
 	public ModelAndView addReview(Review review, ModelMap model) {
 		if(review.getAuthor().equals("")) {
 			review.setAuthor("anonymous");
@@ -45,7 +48,7 @@ public class GamesController {
 	}
 
 	
-	@RequestMapping(value = "/games", method = RequestMethod.GET)
+	@GetMapping("games")
 	public ModelAndView game() {
 		return new ModelAndView("gamesPage", "command", new Game());
 	}
@@ -55,13 +58,13 @@ public class GamesController {
 	 */
 	
 	//TODO 1.0 RequestMapping URL should follow RESTful.
-	@RequestMapping(value = "/game/all", method = RequestMethod.GET)
+	@GetMapping("game/getAll")
 	public ResponseEntity<List<Game>> fetchAllGames() {
 		return new ResponseEntity<List<Game>>(gameService.retrieveAllGames(), HttpStatus.OK);
 	}
 
 	//TODO 1.0 RequestMapping URL should follow RESTful convention
-	@RequestMapping(value = "/game/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/game/createGame", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> createGame(@RequestBody Game game) {
 		gameService.saveGame(game);
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
