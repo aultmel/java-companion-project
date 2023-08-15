@@ -33,12 +33,7 @@ public class GamesController {
 	
 	@RequestMapping(value = "/review", method = RequestMethod.GET)
 	public ModelAndView review() {
-	/**
-	 * TODO 1.0 Rename the jsp view, to "reviewCreatePage" because it matches the URL triggering a circular view path error.
-	 * update games.jsp as well. 
-	 * SEE:  https://www.baeldung.com/spring-circular-view-path-error
-	 */
-		return new ModelAndView("review", "command", new Review());
+		return new ModelAndView("reviewCreatePage", "command", new Review());
 	}
 
 	@RequestMapping(value = "/addReview", method = RequestMethod.POST)
@@ -46,22 +41,13 @@ public class GamesController {
 		if(review.getAuthor().equals("")) {
 			review.setAuthor("anonymous");
 		}
-	/**
-	 * TODO 1.0 Rename the jsp view, to "reviewDetailPage" because what is the view the "result" of?
-	 * update games.jsp as well. 
-	 */
-		return new ModelAndView("result", "submittedReview", review);
+		return new ModelAndView("reviewDetailPage", "submittedReview", review);
 	}
 
 	
 	@RequestMapping(value = "/games", method = RequestMethod.GET)
 	public ModelAndView game() {
-		/**
-		 * TODO 1.0 Rename the jsp view, to "gamesPage" because it matches the URL triggering a circular view path error.
-		 * update games.jsp as well. 
-		 * SEE:  https://www.baeldung.com/spring-circular-view-path-error
-		 */
-		return new ModelAndView("games", "command", new Game());
+		return new ModelAndView("gamesPage", "command", new Game());
 	}
 
 	/**
@@ -69,13 +55,13 @@ public class GamesController {
 	 */
 	
 	//TODO 1.0 RequestMapping URL should follow RESTful.
-	@RequestMapping(value = "/game/getAll", method = RequestMethod.GET)
+	@RequestMapping(value = "/game/all", method = RequestMethod.GET)
 	public ResponseEntity<List<Game>> fetchAllGames() {
 		return new ResponseEntity<List<Game>>(gameService.retrieveAllGames(), HttpStatus.OK);
 	}
 
 	//TODO 1.0 RequestMapping URL should follow RESTful convention
-	@RequestMapping(value = "/game/createGame", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/game/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> createGame(@RequestBody Game game) {
 		gameService.saveGame(game);
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
