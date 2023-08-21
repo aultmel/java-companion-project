@@ -28,7 +28,7 @@ public class GameController {
 
 	@GetMapping(value = "/getAll")
 	public ResponseEntity<List<Game>> fetchAllGames() {
-		return new ResponseEntity<List<Game>>(gameService.retrieveAllGames(), HttpStatus.OK);
+		return new ResponseEntity<List<Game>>(gameService.getAllGames(), HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE)
