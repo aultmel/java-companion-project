@@ -24,7 +24,7 @@
         <h2 class="text-light">Submitted Review Information</h2>
         <table class="table table-dark text-light">
             <tr>
-                <td>ReviewBody</td>
+                <td>Review Body</td>
                 <td>
                     <p>${submittedReview.body}</p>
                 </td>
