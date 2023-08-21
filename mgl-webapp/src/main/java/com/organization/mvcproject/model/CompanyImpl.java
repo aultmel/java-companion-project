@@ -1,14 +1,15 @@
 
 package com.organization.mvcproject.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class Company {
+import com.organization.mvcproject.api.model.Company;
+
+public class CompanyImpl implements Company {
 
 	private Long id;
 	private String name;
-	private List<Game> gamesMade;
+	private List<GameImpl> gamesMade;
 
 	public Long getId() {
 		return id;
@@ -26,11 +27,11 @@ public class Company {
 		this.name = name;
 	}
 
-	public List<Game> getGamesMade() {
+	public List<GameImpl> getGamesMade() {
 		return gamesMade;
 	}
 
-	public void setGamesMade(List<Game> gamesMade) {
+	public void setGamesMade(List<GameImpl> gamesMade) {
 		this.gamesMade = gamesMade;
 	}
 }

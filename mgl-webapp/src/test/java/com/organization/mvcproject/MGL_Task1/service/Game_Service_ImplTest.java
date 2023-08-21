@@ -1,15 +1,13 @@
 package com.organization.mvcproject.MGL_Task1.service;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
-
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
@@ -25,9 +23,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import com.organization.mvcproject.api.service.GameService;
 import com.organization.mvcproject.config.MvcConfiguration;
-import com.organization.mvcproject.model.Game;
-import com.organization.mvcproject.service.GameService;
+import com.organization.mvcproject.model.GameImpl;
 
 @RunWith(JUnitPlatform.class)
 @ExtendWith(SpringExtension.class)
@@ -40,27 +38,27 @@ class Game_Service_ImplTest {
 	@Autowired
 	private GameService gameServiceUnderTest;
 	
-	private static Game testGame = createGame(1);
+	private static GameImpl testGame = createGame(1);
 	
 	private  static final String TEST_GENRE = "Test Genre";
-	private static Game createGame(Integer number) {
-		Game game = new Game();
-		 game.setName("Testing Game Name " + String.valueOf(number));
+	private static GameImpl createGame(Integer number) {
+		GameImpl game = new GameImpl();
+		 game.setName("Testing GameImpl Name " + String.valueOf(number));
 		 game.setGenre(TEST_GENRE);
 		 return game;
 	}
 	
-	private static List<Game> gamesToRemoveAfterTest = new ArrayList<>();
+	private static List<GameImpl> gamesToRemoveAfterTest = new ArrayList<>();
 	
 	@BeforeAll
 	@Test
 	void saveGameServiceSavesAndUpdatesGame() {
 		if(gamesToRemoveAfterTest.isEmpty()) {
-			Game game = gameServiceUnderTest.saveGame(testGame);
+			GameImpl game = gameServiceUnderTest.saveGame(testGame);
 			Assertions.assertNotNull(game.getId());
 			
 			//updates 
-			game.setName("Testing Game Name Updated" );
+			game.setName("Testing GameImpl Name Updated" );
 			testGame = gameServiceUnderTest.saveGame(game);
 			assertEquals(game, testGame);	
 			gamesToRemoveAfterTest.add(testGame);
@@ -84,7 +82,7 @@ class Game_Service_ImplTest {
 	
 	@Test
   	void retrieveAllGamesServiceReturnsGames() {
-		List<Game> games = gameServiceUnderTest.retrieveAllGames(); 
+		List<GameImpl> games = gameServiceUnderTest.retrieveAllGames(); 
 		assertNotNull(games);
 		assertTrue(games.size() >= 2 );
 	}
