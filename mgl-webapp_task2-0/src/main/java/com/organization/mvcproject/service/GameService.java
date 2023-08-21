@@ -6,7 +6,7 @@ import com.organization.mvcproject.model.Game;
 
 public interface GameService {
 
-	List<Game> retrieveAllGames();
+	List<Game> getAllGames();
 
 	Game saveGame(Game game);
 
