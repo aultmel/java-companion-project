@@ -74,7 +74,7 @@ class GameServiceImplTest {
 	
 	@Test
   	void retrieveAllGamesServiceReturnsGames() {
-		List<Game> games = gameServiceUnderTest.retrieveAllGames(); 
+		List<Game> games = gameServiceUnderTest.getAllGames(); 
 		assertNotNull(games);
 		assertTrue(games.size() >= 2 );
 	}

@@ -16,7 +16,7 @@ public class GameServiceImpl implements GameService {
 	private GameStreamBasedDAO gameDAO; 
 
 	
-	public List<Game> retrieveAllGames() {
+	public List<Game> getAllGames() {
 		return gameDAO.findAllGames();
 	}
 

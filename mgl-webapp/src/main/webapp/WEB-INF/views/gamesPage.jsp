@@ -1,9 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="ISO-8859-1"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="mgl" %>
     <!DOCTYPE html>
-    <html>
+    <html lang="en">
 
     <head>
+    	<meta charset="UTF-8">
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
         <script src="resources/static/js/app.js"></script>
         <script src="resources/static/js/MGL_Task1.service.js"></script>
