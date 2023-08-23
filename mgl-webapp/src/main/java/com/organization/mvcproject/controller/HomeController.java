@@ -6,12 +6,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.organization.mvcproject.model.GameImpl;
+
 @Controller
 public class HomeController {
 
     @GetMapping("/")
     public String home() {
         return "index";
+    }
+    
+    @GetMapping("games")
+    public ModelAndView game() {
+        return new ModelAndView("gamesPage", "command", new GameImpl());
     }
     
     @RequestMapping(value="/hello")

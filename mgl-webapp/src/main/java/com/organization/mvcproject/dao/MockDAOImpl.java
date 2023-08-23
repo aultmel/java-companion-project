@@ -1,11 +1,14 @@
 package com.organization.mvcproject.dao;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.google.common.collect.ImmutableList;
 import com.organization.mvcproject.api.dao.MockDAO;
+import com.organization.mvcproject.api.model.Game;
 import com.organization.mvcproject.model.GameImpl;
 
 
@@ -13,10 +16,10 @@ import com.organization.mvcproject.model.GameImpl;
 public class MockDAOImpl implements MockDAO {
     
     private static Long gameId = new Long(0);
-    private static List<GameImpl> games = new ArrayList<GameImpl>();
+    private static List<GameImpl> gameImpls = new ArrayList<GameImpl>();
 
     static {
-        games = populateGames();
+        gameImpls = populateGames();
     }
 
     private static List<GameImpl> populateGames() {
@@ -36,19 +39,19 @@ public class MockDAOImpl implements MockDAO {
         game3.setGenre("MMORPG");
         game3.setName("Runescape");
 
-        games.add(game1);
-        games.add(game2);
-        games.add(game3);
+        gameImpls.add(game1);
+        gameImpls.add(game2);
+        gameImpls.add(game3);
 
-        return games;
+        return gameImpls;
     }
     
-    public List<GameImpl> getAllGames() {
-        return games;
+    public List<Game> getAllGames() {
+        return ImmutableList.copyOf(gameImpls);
     }
     
-    public GameImpl getGameById(Long id) {
-        for (GameImpl game : games) {
+    public Game getGameById(Long id) {
+        for (Game game : gameImpls) {
             if (id == game.getId()) {
                 return game;
             }
@@ -57,39 +60,42 @@ public class MockDAOImpl implements MockDAO {
         return null;
     }
     
-    public GameImpl saveGame(GameImpl game) {
+    public Game saveGame(Game game) {
         if (game.getId() != null) {
-            GameImpl existingGame = getGameById(game.getId());
+            Game existingGame = getGameById(game.getId());
             if (existingGame != null) {
-                for (int i = 0; i < games.size(); i++) {
-                    if (game.getId() == games.get(i).getId()) {
-                        games.set(i, existingGame);
+                for (int i = 0; i < gameImpls.size(); i++) {
+                    if (game.getId() == gameImpls.get(i).getId()) {
+                        gameImpls.set(i, (GameImpl) existingGame);
                     }
                 }
             }
         }
         game.setId(gameId++);
-        games.add(game);
+        gameImpls.add((GameImpl)game);
         return game;
     }
     
     public boolean deleteGameById(Long id) {
-        for (int i = 0; i < games.size(); i++) {
-            if (id == games.get(i).getId()) {
-                games.remove(games.get(i));
+        for (int i = 0; i < gameImpls.size(); i++) {
+            if (id == gameImpls.get(i).getId()) {
+                gameImpls.remove(gameImpls.get(i));
                 return true;
             }
         }
         return false;
     }
     
-    public GameImpl getGameByGenre(String genre) {
-        for (int i = 0; i < games.size(); i++) {
-            if (genre.equals(games.get(i).getGenre())) {
-                return games.get(i);
+    public List<Game> getGameByGenre(String genre) {
+        List<Game> gamesByGenre = new ArrayList<>();
+        for (int i = 0; i < gameImpls.size(); i++) {
+            if (genre.equals(gameImpls.get(i).getGenre())) {
+                gamesByGenre.add(gameImpls.get(i));
             }
         }
-        return null;
+        
+        return gamesByGenre.isEmpty() ? null : gamesByGenre;
+        
     }
 
 }

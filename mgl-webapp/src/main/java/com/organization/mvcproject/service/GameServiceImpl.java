@@ -5,30 +5,35 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.organization.mvcproject.api.dao.MockDAO;
+import com.organization.mvcproject.api.model.Game;
 import com.organization.mvcproject.api.service.GameService;
-import com.organization.mvcproject.dao.MockDAOImpl;
-import com.organization.mvcproject.model.GameImpl;
 
 @Service
 public class GameServiceImpl implements GameService {
 
     @Autowired
-	private MockDAOImpl mockDao;
+	private MockDAO mockDao;
 
-	public List<GameImpl> retrieveAllGames() {
+	public List<Game> retrieveAllGames() {
 		return mockDao.getAllGames();
 	}
 
-	public GameImpl saveGame(GameImpl game) {
+	public Game saveGame(Game game) {
 		return mockDao.saveGame(game);
 	}
 	
-	public GameImpl getGameById(Long id) {
+	public Game getGameById(Long id) {
 	    return mockDao.getGameById(id);
 	}
 	
 	public boolean deleteGameById(Long id) {
 	    return mockDao.deleteGameById(id);
+	    
+	}
+	
+	public List<Game> getGameByGenre(String genre) {
+	    return mockDao.getGameByGenre(genre);
 	    
 	}
 	
