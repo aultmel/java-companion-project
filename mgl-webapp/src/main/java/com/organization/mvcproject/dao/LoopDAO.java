@@ -12,8 +12,8 @@ import com.organization.mvcproject.api.model.Game;
 import com.organization.mvcproject.model.GameImpl;
 
 
-@Repository
-public class MockDAOImpl implements MockDAO {
+@Repository("loopDAO")
+public class LoopDAO implements MockDAO {
     
     private static Long gameId = new Long(0);
     private static List<GameImpl> gameImpls = new ArrayList<GameImpl>();
@@ -46,10 +46,12 @@ public class MockDAOImpl implements MockDAO {
         return gameImpls;
     }
     
+    @Override
     public List<Game> getAllGames() {
         return ImmutableList.copyOf(gameImpls);
     }
     
+    @Override
     public Game getGameById(Long id) {
         for (Game game : gameImpls) {
             if (id == game.getId()) {
@@ -60,6 +62,7 @@ public class MockDAOImpl implements MockDAO {
         return null;
     }
     
+    @Override
     public Game saveGame(Game game) {
         if (game.getId() != null) {
             Game existingGame = getGameById(game.getId());
@@ -76,6 +79,7 @@ public class MockDAOImpl implements MockDAO {
         return game;
     }
     
+    @Override
     public boolean deleteGameById(Long id) {
         for (int i = 0; i < gameImpls.size(); i++) {
             if (id == gameImpls.get(i).getId()) {
@@ -86,6 +90,7 @@ public class MockDAOImpl implements MockDAO {
         return false;
     }
     
+    @Override
     public List<Game> getGameByGenre(String genre) {
         List<Game> gamesByGenre = new ArrayList<>();
         for (int i = 0; i < gameImpls.size(); i++) {

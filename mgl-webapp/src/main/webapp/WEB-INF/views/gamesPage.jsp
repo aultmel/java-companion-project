@@ -62,15 +62,14 @@
 
                         <div class="row">
                             <div class="form-actions floatRight">
-                               <!--data-ng-if="!ctrl.game || !ctrl.game.id"--> <input type="submit" value="Add" class="btn btn-primary btn-sm">
-                                <!--<button data-ng-if="ctrl.game.id" data-ng-click="ctrl.updateGame()" class="btn btn-primary btn-sm">Update</button>-->
-                                <button data-ng-if="ctrl.game" data-ng-click="ctrl.resetForm()" type="reset" class="btn btn-primary btn-sm">Clear</button>
+                              <input type="submit" value="Add" class="btn btn-primary btn-sm">
+                               	<button data-ng-if="ctrl.game" data-ng-click="ctrl.resetForm()" type="reset" class="btn btn-primary btn-sm">Clear</button>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="formcontainer">
-                    <form data-ng-if="ctrl.game.id" ng-submit="ctrl.updateGame()" name="gameForm" class="form-horizontal">
+                    <form data-ng-if="ctrl.game.id"  name="gameForm" class="form-horizontal">
                         <input type="hidden" ng-model="ctrl.game.id" />
                         <div class="row">
                             <div class="form-group col-md-12">
@@ -98,9 +97,8 @@
 
                         <div class="row">
                             <div class="form-actions floatRight">
-                               <!--data-ng-if="!ctrl.game || !ctrl.game.id"--> <input type="submit" value="Update" class="btn btn-primary btn-sm">
-                                <!--<button data-ng-if="ctrl.game.id" data-ng-click="ctrl.updateGame()" class="btn btn-primary btn-sm">Update</button>-->
-                                <button data-ng-if="ctrl.game" data-ng-click="ctrl.resetForm()" type="reset" class="btn btn-primary btn-sm">Clear</button>
+                               <input data-ng-click="ctrl.updateGame()" type="submit" value="Update" class="btn btn-primary btn-sm">
+                               <button data-ng-if="ctrl.game" data-ng-click="ctrl.resetForm()" type="reset" class="btn btn-primary btn-sm">Clear</button>
                             </div>
                         </div>
                     </form>
