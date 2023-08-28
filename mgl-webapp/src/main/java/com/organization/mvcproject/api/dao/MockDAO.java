@@ -2,18 +2,18 @@ package com.organization.mvcproject.api.dao;
 
 import java.util.List;
 
-import com.organization.mvcproject.model.GameImpl;
+import com.organization.mvcproject.api.model.Game;
 
 public interface MockDAO {
     
-    List<GameImpl> getAllGames();
+    List<Game> getAllGames();
     
-    GameImpl getGameById(Long id);
+    Game getGameById(Long id);
     
     boolean deleteGameById(Long id);
     
-    GameImpl getGameByGenre(String genre);
+    List<Game> getGameByGenre(String genre);
     
-    GameImpl saveGame(GameImpl game);
+    Game saveGame(Game game);
 
 }

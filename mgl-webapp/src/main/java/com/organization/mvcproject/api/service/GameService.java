@@ -2,16 +2,18 @@ package com.organization.mvcproject.api.service;
 
 import java.util.List;
 
-import com.organization.mvcproject.model.GameImpl;
+import com.organization.mvcproject.api.model.Game;
 
 public interface GameService {
 
-	List<GameImpl> retrieveAllGames();
+	List<Game> retrieveAllGames();
 
-	GameImpl saveGame(GameImpl game);
+	Game saveGame(Game game);
 	
-	GameImpl getGameById(Long id);
+	Game getGameById(Long id);
 	
 	boolean deleteGameById(Long id);
+	
+	public List<Game> getGameByGenre(String genre);
 
 }
